@@ -149,5 +149,20 @@ class JopController extends Controller
         return view('seeker.jops',['sjops'=>$jops]);
     }
 
+    public function search(Request $request){
+        $user=Auth::user();
+        $jops=JOP::where('title', 'like', '%' . $request->jop . '%')
+        ->orWhere('company', 'like', '%' . $request->jop . '%')
+        ->orWhere('salary', 'like', '%' . $request->jop . '%')
+        ->orWhere('location', 'like', '%' . $request->jop . '%')
+        ->orWhere('type', 'like', '%' . $request->jop . '%')
+        ->get();
+        if($user['rule']==="seeker"){
+            return view('seeker.jops',['jops'=>$jops]);
+        }elseif($user['rule']==="employee"){
+            return view('employee.jops',['jops'=>$jops]);
+        }
+    }
+
    
 }

@@ -32,13 +32,11 @@
         <th scope="col"> salary</th>
         <th scope="col">type</th>
         <th scope="col">company</th>
-        <th scope="col">view jop</th>
-        @if (@isset($sjops))
-        <th scope="col">waiting list</th>
-        <th scope="col">jop requests</th>
-        <th scope="col">update</th>
-        <th scope="col">delete</th>
-        @endif
+        <th scope="col"> </th>
+        <th scope="col"> </th>
+        <th scope="col"> </th>
+        <th scope="col"> </th>
+        
       
 
       </tr>
@@ -73,7 +71,11 @@
         <td>{{$jop['salary']}}</td>
         <td>{{$jop['type']}}</td>
         <td>{{$jop['company']}}</td>
-        <td><a href="{{route('jop',[$jop['id']])}}" class="btn btn-success">view the jop</a></td>
+        <td><a href="{{route('jop',[$jop['id']])}}" class="btn btn-light">view the jop</a></td>
+        @if ($user['id']==$jop['user_id'])
+        <td><a href="{{route('updateJopForm',[$jop['id']])}}" class="btn btn-light">update the jop</a></td>
+        <td><a href="{{route('deleteJop',[$jop['id']])}}" class="btn btn-light">delete the jop</a></td>
+        @endif
     </tr>
     @endforeach
 @endif

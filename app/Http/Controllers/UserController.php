@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Jop;
 use App\Models\JopRequest;
 use App\Models\Notification;
 use App\Models\User;
@@ -11,10 +10,8 @@ use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
     //
-    private $jops;
     private $message;
     public function __construct(){
-        $this->jops=Jop::all();
         $this->message=" ";
     }
     public function request($user_id,$jop_id,$employee_id ,$status){
@@ -186,6 +183,7 @@ class UserController extends Controller
     }
     public function deleteJopREquest($jop_id){
         $user=Auth::user();
+        
         $employee_id=$user['id'];
         $request=JopRequest::where('jop_id',$jop_id)
         ->where('employee_id',$employee_id)

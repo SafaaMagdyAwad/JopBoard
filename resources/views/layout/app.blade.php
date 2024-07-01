@@ -82,6 +82,15 @@
                   <li class="nav-item">
                     @yield('link7')
                   </li>
+                   <li class="nav-item">
+                    <form action="{{route('search')}}" method="GET">
+                      <div class="input-group mb-3">
+                          <button class="btn btn-outline-secondary" type="button" id="button-addon1">search</button>
+                          <input type="text" class="form-control" placeholder="search jop by name or company" aria-label="Example text with button addon" aria-describedby="button-addon1" name="jop">
+                      </div>
+                    </form>                
+                  </li>
+                  
                   <li class="nav-item">
                     @yield('link8')
                   </li>

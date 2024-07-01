@@ -31,9 +31,9 @@
                 <th scope="col"> salary</th>
                 <th scope="col">type</th>
                 <th scope="col">company</th>
-                <th scope="col">jop requests</th>
-                <th scope="col">waiting list</th>
-                <th scope="col">accepted list</th>
+                <th scope="col"> </th>
+                <th scope="col"> </th>
+                <th scope="col"> </th>
               
         
               </tr>
@@ -48,10 +48,12 @@
                 <td>{{$jop['salary']}}</td>
                 <td>{{$jop['type']}}</td>
                 <td>{{$jop['company']}}</td>
-                <td><a href="{{route('allJopRequests',[$jop['id']])}}" class="btn btn-success">view the jop requests</a></td>
-                <td> <a href="{{route('waitingList',[$jop['id']])}}" class="btn btn-warning">waiting list</a></td>
-                <td> <a href="{{route('acceptedList',[$jop['id']])}}" class="btn btn-success">Accepted list</a></td>
-               
+                @if ($user_id==$jop['user_id'])
+                
+                <td><a href="{{route('allJopRequests',[$jop['id']])}}" class="btn btn-light">view the jop requests</a></td>
+                <td> <a href="{{route('waitingList',[$jop['id']])}}" class="btn btn-light">waiting list</a></td>
+                <td> <a href="{{route('acceptedList',[$jop['id']])}}" class="btn btn-light">Accepted list</a></td>
+               @endif
             </tr>
             </tbody>
         </table>

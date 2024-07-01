@@ -25,7 +25,8 @@ class AuthController extends Controller
                 return view('404');
             }
         }else{
-            return view('welcome');
+            $jopController=new JopController();
+            return view('welcome',['jops'=>$jopController->jops]);
         }
 
     }
@@ -67,8 +68,8 @@ class AuthController extends Controller
                 return view('seeker.seekerHome',['user'=>$logedinuser]);
                 // dd('seeker');
             }else{
-                return view('welcome');
-            }
+                $jopController=new JopController();
+                return view('welcome',['jops'=>$jopController->jops]);            }
         }else{
             // dd('no user');
             
@@ -92,7 +93,8 @@ class AuthController extends Controller
                     return view('seeker.seekerHome',['user'=>$user]);
                     // dd('seeker');
                 }else{
-                    return view('welcome');
+                       $jopController=new JopController();
+                        return view('welcome',['jops'=>$jopController->jops]);
                 }
                 // dd($user);
             }else{

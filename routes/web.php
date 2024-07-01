@@ -53,6 +53,8 @@ Route::group(['middleware'=> 'employee'], function () {
     Route::get('/reqTrack',[UserController::class,'reqTrack'])->name('reqTrack');//id is the jop id
 
     Route::get('/deleteJopREquest/{jop_id}',[UserController::class,'deleteJopREquest'])->name('deleteJopREquest');//id is the jop id
+   
+   
 
     
 });

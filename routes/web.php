@@ -35,6 +35,7 @@ Route::get('/logout',[AuthController::class,'logout'])->name('logout');
 Route::get('/allJops',[JopController::class,'allJops'])->name('allJops');
 Route::get('/jop/{id}',[JopController::class,'jop'])->name('jop');
 
+Route::get('/search',[JopController::class,'search'])->name('search');
 
 
 

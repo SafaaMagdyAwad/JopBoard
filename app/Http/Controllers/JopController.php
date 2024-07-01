@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class JopController extends Controller
 {
     //
-    private $jops;
+    public $jops;
     public function __construct(){
         $this->jops=Jop::all();
     }
@@ -55,9 +55,13 @@ class JopController extends Controller
     }
     public function allJops(){
         $user=Auth::user();
+       
+        if(empty($user)){
+            return view('login');
+        }
         if($user['rule']==="seeker"){
 
-            return view('seeker.jops',['jops'=>$this->jops]);
+            return view('seeker.jops',['jops'=>$this->jops,'user'=>$user]);
         }elseif($user['rule']==="employee"){
             return view('employee.jops',['jops'=>$this->jops]);
         }
@@ -112,7 +116,7 @@ class JopController extends Controller
             ]);
         }
         
-        return view('seeker.jops',['jops'=>$this->jops]);
+        return view('seeker.jops',['jops'=>$this->jops,'user'=>$user]);
     }
     public function deleteJop($id){
         $jop=Jop::findOrFail($id);
@@ -146,11 +150,14 @@ class JopController extends Controller
         $id=$user['id'];
         $jops=Jop::where('user_id',$id)->get();
         // dd($jops);
-        return view('seeker.jops',['sjops'=>$jops]);
+        return view('seeker.jops',['sjops'=>$jops,'user'=>$user]);
     }
 
     public function search(Request $request){
         $user=Auth::user();
+        if(empty($user)){
+            return view('login');
+        }
         $jops=JOP::where('title', 'like', '%' . $request->jop . '%')
         ->orWhere('company', 'like', '%' . $request->jop . '%')
         ->orWhere('salary', 'like', '%' . $request->jop . '%')
@@ -158,9 +165,11 @@ class JopController extends Controller
         ->orWhere('type', 'like', '%' . $request->jop . '%')
         ->get();
         if($user['rule']==="seeker"){
-            return view('seeker.jops',['jops'=>$jops]);
+            return view('seeker.jops',['jops'=>$jops,'user'=>$user]);
         }elseif($user['rule']==="employee"){
             return view('employee.jops',['jops'=>$jops]);
+        }else{
+            return view('welcome',['jops'=>$jops]);
         }
     }
 
